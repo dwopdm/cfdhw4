@@ -60,7 +60,8 @@ Y = np.linspace(0, 0.12, ny+2)
 XX, YY = np.meshgrid(X, Y)
 
 plt.figure(figsize=(8,5))
-cs = plt.contour(XX, YY, T, levels=10)
+levels = np.arange(20, 100, 1)
+cs = plt.contour(XX, YY, T, levels=levels)
 plt.clabel(cs, inline=1, fontsize=10)
 plt.title('板内稳定温度场等温线 (GS)')
 plt.xlabel('x (m)')
@@ -68,7 +69,7 @@ plt.ylabel('y (m)')
 plt.show()
 
 # (2) 不同松弛因子比较收敛速度
-omegas = np.linspace(1.0, 1.9, 10)
+omegas = np.linspace(1.0, 2.4, 15)
 iters_list = []
 for w in omegas:
     _, it, _ = solve_laplace(nx, ny, omega=w, tol=1e-6)
